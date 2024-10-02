@@ -1,12 +1,19 @@
 import express from "express";
 import { PrismaClient } from "@prisma/client";
-
+import cors from "cors";
 import { rotas } from "./assets";
 
 const app = express();
 const prisma = new PrismaClient();
 
 app.use(express.json());
+
+const allowedOrigins = "*";
+const options: cors.CorsOptions = {
+  origin: allowedOrigins,
+};
+
+app.use(cors(options));
 
 type ContactProps = {
   id: string | number;
